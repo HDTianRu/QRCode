@@ -1,0 +1,11 @@
+[{
+	"type": "switch",
+	"name": "autoClose",
+	"title": "扫码成功自动关闭",
+	"normal": true
+}, {
+	"type": "switch",
+	"name": "autoConfirm",
+	"title": "抢码成功自动确认",
+	"normal": true
+}]

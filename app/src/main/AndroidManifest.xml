@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.TianRu.QRCode">
+
+    <!-- 修改或删除您共享存储空间中的内容 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <!-- 读取您共享存储空间中的内容 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- READ_FRAME_BUFFER -->
+    <uses-permission android:name="android.permission.READ_FRAME_BUFFER"/>
+
+    <!-- 此应用可显示在其他应用上方 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <!-- 拥有完全的网络访问权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- 请求忽略电池优化 -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+
+    <!-- 防止手机休眠 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- 拍摄照片和视频 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <application
+        android:name=".Crash"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:configChanges="orientation"
+        android:resizeableActivity="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:exported="true">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+
+            </intent-filter>
+
+        </activity>
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="4.0"/>
+
+        <activity
+            android:name=".Login"
+            android:label="登录"
+            android:exported="true"/>
+
+        <activity android:name=".Setting"/>
+
+        <activity android:name=".Account"/>
+
+        <activity android:name=".Flv"/>
+
+    </application>
+
+</manifest>
