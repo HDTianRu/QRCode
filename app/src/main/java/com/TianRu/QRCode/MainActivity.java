@@ -301,6 +301,9 @@ public class MainActivity extends Activity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    windowManager.removeView(floatingView);
+    uh.close();
     helper.close();
+    System.exit(0);
   }
 }
