@@ -1,7 +1,9 @@
 package com.TianRu.QRCode;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -14,13 +16,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.HashMap;
@@ -59,6 +61,7 @@ public class MainActivity extends Activity {
     Button wishlog = findViewById(R.id.wishlog);
     Button start = findViewById(R.id.start);
     Button flv = findViewById(R.id.flv);
+    Button confirm = findViewById(R.id.confirm);
     setting.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -114,6 +117,29 @@ public class MainActivity extends Activity {
             return;
           }
           Toast.makeText(MainActivity.this, "已授予所需权限，无需再次授予", Toast.LENGTH_SHORT).show();
+        }
+      });
+    confirm.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          final View layout = LayoutInflater.from(MainActivity.this).inflate(R.layout.simple_input, null);
+          AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+          builder.setView(layout);
+          builder.setTitle("Input Confirm Data");
+          builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                final String data = ((EditText)layout.findViewById(R.id.input)).getText().toString();
+                new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                      Request.confirm(data);
+                    }
+                  }).start();
+                dialog.dismiss();
+              }
+            });
+          builder.create().show();
         }
       });
     // 获取WindowManager服务

@@ -10,8 +10,6 @@ import android.util.Log;
 
 public class UserHelper {
 
-  public String TAG = "原神怎么你了";
-
   private static DBHelper helper;
   private static SQLiteDatabase db;
   private static User current;
@@ -73,17 +71,14 @@ public class UserHelper {
         "uid = ?",
         new String[] {user.uid}
       );
-      Log.e(TAG, "update");
     } else {
       index = db.insert(
         User.table,
         null,
         value
       );
-      Log.e(TAG, "insert");
     }
     boolean success = index >= 1;
-    Log.e(TAG, index + "");
     if (success) {
       switchUser(user.uid);
       return true;

@@ -61,9 +61,10 @@ public class ScreenCaptureHelper {
       Toast.makeText(this.context, "未授予录屏权限", Toast.LENGTH_SHORT).show();
       return;
     }
-    mVirtualDisplay = mMediaProjection.createVirtualDisplay("ScreenCapture",
-                                                            mScreenWidth, mScreenHeight, mScreenDensity, VIRTUAL_DISPLAY_FLAGS,
-                                                            mImageReader.getSurface(), null, handler);
+    mVirtualDisplay = mMediaProjection.createVirtualDisplay(
+      "ScreenCapture",
+      mScreenWidth, mScreenHeight, mScreenDensity, VIRTUAL_DISPLAY_FLAGS,
+      mImageReader.getSurface(), null, handler);
     mImageReader.setOnImageAvailableListener(listener, handler);
   }
 
@@ -91,8 +92,8 @@ public class ScreenCaptureHelper {
       e.printStackTrace();
     }
   }
-  
-  public void pause(){
+
+  public void pause() {
     if (handler != null && handler.getLooper() != null) {
       handler.getLooper().quitSafely();
       handler = null;

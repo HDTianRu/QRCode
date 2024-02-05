@@ -38,19 +38,45 @@ public class Request {
         MainActivity.logger.error(res.getString("message"));
         return false;
       }
-      if (!confirm) return true;
       Map payload = new HashMap();
       payload.put("proto", "Account");
       payload.put("raw", value.get("raw"));
       map.put("payload", payload);
+      if (!confirm) {
+        MainActivity.logger.info(
+          "Confirm Data:\n" + 
+          "https://api-sdk.mihoyo.com/" + value.get("biz_key") + "/combo/panda/qrcode/confirm" + "#" + 
+          value.get("cookie").toString() + "#" + 
+          new JSONObject(map).toString());
+        return true;
+      }
       String str2 = post("https://api-sdk.mihoyo.com/" + value.get("biz_key") + "/combo/panda/qrcode/confirm", value.get("cookie").toString(), new JSONObject(map).toString());
       res = new JSONObject(str2);
       if (res.getInt("retcode") != 0) {
         MainActivity.logger.error(res.getString("message"));
         return false;
       }
+      MainActivity.logger.info("确认成功");
       return true;
     } catch (JSONException e) {}
+    return false;
+  }
+
+  public static boolean confirm(String data) {
+    String[] datum = data.split("#");
+    if (datum.length != 3) {
+      MainActivity.logger.error("格式不正确");
+    return false;
+    }
+    try {
+      String str2 = post(datum[0], datum[1], datum[2]);
+      JSONObject res = new JSONObject(str2);
+      if (res.getInt("retcode") != 0) {
+        MainActivity.logger.error(res.getString("message"));
+        return false;
+      }
+      return true;
+    } catch (Exception e) {}
     return false;
   }
 
