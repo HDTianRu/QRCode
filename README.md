@@ -1,2 +1,2 @@
 # QRCode
-A android app which auto search QRCode and login
+A android app which automatic scan Mihoyo QRCode and login

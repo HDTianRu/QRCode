@@ -97,9 +97,6 @@ public class MainActivity extends Activity {
     request.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            Toast.makeText(MainActivity.this, "系统版本过低，请更换手机或升级系统", Toast.LENGTH_LONG).show();
-          }
           String packageName = getPackageName();
           if (!Settings.canDrawOverlays(MainActivity.this)) {
             // 如果应用程序没有被授予悬浮窗口权限，则打开权限授权界面
@@ -304,7 +301,7 @@ public class MainActivity extends Activity {
       windowManager.addView(floatingView, params);
     }
     if (requestCode == REQUEST_CODE) {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(this)) {
+      if (Settings.canDrawOverlays(this)) {
       } else {
         // 用户未授予悬浮窗口权限
         Toast.makeText(this, "未授予悬浮窗口权限", Toast.LENGTH_SHORT).show();
@@ -330,6 +327,7 @@ public class MainActivity extends Activity {
     windowManager.removeView(floatingView);
     uh.close();
     helper.close();
+    this.finish();
     System.exit(0);
   }
 }

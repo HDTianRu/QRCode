@@ -20,14 +20,16 @@
       android:ems="15"
       android:layout_height="wrap_content"
       android:hint="请输入账号"
-      android:id="@+id/userID"/>
+      android:id="@+id/userID"
+		android:layout_weight="1"/>
 
     <EditText
       android:layout_width="match_parent"
       android:ems="15"
       android:layout_height="wrap_content"
       android:hint="请输入密码"
-      android:id="@+id/userPass"/>
+      android:id="@+id/userPass"
+		android:layout_weight="1"/>
 
     <Button
       android:layout_width="match_parent"
@@ -37,7 +39,8 @@
       android:background="@drawable/button_background"
       android:layout_marginLeft="10dp"
       android:layout_marginRight="10dp"
-      android:layout_marginTop="10dp"/>
+      android:layout_marginTop="10dp"
+		android:layout_weight="1"/>
 
     <Button
       android:layout_width="match_parent"
@@ -47,7 +50,8 @@
       android:id="@+id/loginByQRCode"
       android:layout_marginLeft="10dp"
       android:layout_marginRight="10dp"
-      android:layout_marginTop="10dp"/>
+      android:layout_marginTop="10dp"
+		android:layout_weight="1"/>
 
     <Button
       android:layout_width="match_parent"
@@ -57,7 +61,8 @@
       android:id="@+id/loginByYAML"
       android:layout_marginLeft="10dp"
       android:layout_marginRight="10dp"
-      android:layout_marginTop="10dp"/>
+      android:layout_marginTop="10dp"
+		android:layout_weight="1"/>
     
     <Button
       android:layout_width="match_parent"
@@ -67,7 +72,8 @@
       android:id="@+id/loginByToken"
       android:layout_marginLeft="10dp"
       android:layout_marginRight="10dp"
-      android:layout_marginTop="10dp"/>
+      android:layout_marginTop="10dp"
+		android:layout_weight="1"/>
     
     <Button
       android:layout_width="match_parent"
@@ -77,21 +83,23 @@
       android:id="@+id/manageUser"
       android:layout_marginLeft="10dp"
       android:layout_marginRight="10dp"
-      android:layout_marginTop="10dp"/>
+      android:layout_marginTop="10dp"
+		android:layout_weight="1"/>
 
     <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:id="@+id/qrcode"
-      android:adjustViewBounds="true"/>
+      android:adjustViewBounds="true"
+		android:layout_weight="1"/>
 
     <ScrollView
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
+      android:layout_height="match_parent">
 
       <WebView
         android:id="@+id/web"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
 
     </ScrollView>

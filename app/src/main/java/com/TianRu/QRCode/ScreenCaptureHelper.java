@@ -17,10 +17,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.concurrent.CountDownLatch;
 
 public class ScreenCaptureHelper {
-  private static final String TAG = "ScreenCaptureHelper";
 
   private static final int VIRTUAL_DISPLAY_FLAGS = DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR;
 
@@ -35,7 +33,6 @@ public class ScreenCaptureHelper {
   private ImageReader mImageReader;
   private VirtualDisplay mVirtualDisplay;
   private Handler handler;
-  private Bitmap bit;
 
   public ScreenCaptureHelper(MediaProjection media) {
     this.mMediaProjection = media;
