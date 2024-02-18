@@ -194,6 +194,15 @@ public class MainActivity extends Activity {
                       String url = ScanQRCode.image(image, true);
                       logger.debug(url);
                       if (url.startsWith("https://user.mihoyo.com/qr_code_in_game.html")) {
+                        logger.info("已扫描到二维码");
+                        Map value=new HashMap<String,Object>();
+                        for (String e:url.substring(45).split("&")) {
+                          String[] v=e.split("=");
+                          value.put(v[0], v[1]);
+                        }
+                        value.put("cookie", user.stoken);
+                        value.put("raw", user.raw);
+                        boolean succ=Request.login(value, autoConfirm);
                         if (autoClose) {
                           isRun = false;
                           helper.pause();
@@ -204,15 +213,6 @@ public class MainActivity extends Activity {
                               }
                             });
                         }
-                        logger.info("已扫描到二维码");
-                        Map value=new HashMap<String,Object>();
-                        for (String e:url.substring(45).split("&")) {
-                          String[] v=e.split("=");
-                          value.put(v[0], v[1]);
-                        }
-                        value.put("cookie", user.stoken);
-                        value.put("raw", user.raw);
-                        boolean succ=Request.login(value, autoConfirm);
                         value = null;
                         if (succ) {
                           logger.info("扫码成功");
@@ -224,7 +224,7 @@ public class MainActivity extends Activity {
             });
         }
       });
-
+    
     floatingView.setOnTouchListener(new View.OnTouchListener() {
         private int initialX;
         private int initialY;

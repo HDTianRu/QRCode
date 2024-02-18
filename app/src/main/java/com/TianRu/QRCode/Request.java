@@ -66,7 +66,7 @@ public class Request {
     String[] datum = data.split("#");
     if (datum.length != 3) {
       MainActivity.logger.error("格式不正确");
-    return false;
+      return false;
     }
     try {
       String str2 = post(datum[0], datum[1], datum[2]);
