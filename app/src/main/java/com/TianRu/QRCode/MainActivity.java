@@ -188,11 +188,12 @@ public class MainActivity extends Activity {
                     @Override
                     public void onImageAvailable(ImageReader reader) {
                       Image image = reader.acquireLatestImage();
-                      Bitmap bit = ScreenCaptureHelper.imageToBitmap(image);
+                      /*Bitmap bit = ScreenCaptureHelper.imageToBitmap(image);
                       image.close();
                       if (bit == null) return;
                       String url = ScanQRCode.scan(bit);
-                      bit.recycle();
+                      bit.recycle();*/
+                      String url = ScanQRCode.image(image, true);
                       logger.debug(url);
                       if (url.startsWith("https://user.mihoyo.com/qr_code_in_game.html")) {
                         if (autoClose) {
