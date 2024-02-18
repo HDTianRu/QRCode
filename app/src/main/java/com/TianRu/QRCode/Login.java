@@ -38,7 +38,7 @@ import org.yaml.snakeyaml.Yaml;
 
 public class Login extends Activity {
   private Handler handler;
-  private Thread tloginByPass;
+  //private Thread tloginByPass;
   private Thread tloginByQRCode;
   public static String device = Request.randomString(64);
   public int width;
@@ -56,16 +56,16 @@ public class Login extends Activity {
     DisplayMetrics metrics = new DisplayMetrics();
     windowManager.getDefaultDisplay().getRealMetrics(metrics);
     width = metrics.widthPixels;
-    final WebView web=findViewById(R.id.web);
+    //final WebView web=findViewById(R.id.web);
     final ImageView iv=findViewById(R.id.qrcode);
-    final EditText id=findViewById(R.id.userID);
-    final EditText pass=findViewById(R.id.userPass);
-    Button loginByPass=findViewById(R.id.loginByPass);
+    //final EditText id=findViewById(R.id.userID);
+    //final EditText pass=findViewById(R.id.userPass);
+    //Button loginByPass=findViewById(R.id.loginByPass);
     Button loginByQRCode=findViewById(R.id.loginByQRCode);
     Button loginByToken=findViewById(R.id.loginByToken);
     Button loginByYAML=findViewById(R.id.loginByYAML);
     Button manageUser=findViewById(R.id.manageUser);
-    loginByPass.setOnClickListener(new View.OnClickListener() {
+    /*loginByPass.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           tloginByPass = new Thread(new Runnable(){
@@ -100,7 +100,7 @@ public class Login extends Activity {
             });
           tloginByPass.start();
         }
-      });
+      });*/
     loginByQRCode.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -314,16 +314,16 @@ public class Login extends Activity {
   protected void onDestroy() {
     super.onDestroy();
 
-    if (tloginByPass != null) tloginByPass.interrupt();
+    //if (tloginByPass != null) tloginByPass.interrupt();
     if (tloginByQRCode != null) tloginByQRCode.interrupt();
     try {
-      if (tloginByPass != null) tloginByPass.join();
+    //  if (tloginByPass != null) tloginByPass.join();
       if (tloginByQRCode != null) tloginByQRCode.join();
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
 
-    tloginByPass = null;
+    //tloginByPass = null;
     tloginByQRCode = null;
   }
 }
