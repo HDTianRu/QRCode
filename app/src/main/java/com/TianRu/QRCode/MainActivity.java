@@ -5,14 +5,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -82,7 +80,7 @@ public class MainActivity extends Activity {
       });
     TextView tv=findViewById(R.id.log);
     TextView floating_tv=floatingView.findViewById(R.id.floating_log);
-    logger = new Logger(this, tv, floating_tv, Logger.LEVEL_DEBUG);
+    logger = new Logger(this, tv, floating_tv, spUtil.getBoolean("debug", false) ? Logger.LEVEL_DEBUG : Logger.LEVEL_INFO);
     wishlog.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -189,10 +187,10 @@ public class MainActivity extends Activity {
                     public void onImageAvailable(ImageReader reader) {
                       Image image = reader.acquireLatestImage();
                       /*Bitmap bit = ScreenCaptureHelper.imageToBitmap(image);
-                      image.close();
-                      if (bit == null) return;
-                      String url = ScanQRCode.scan(bit);
-                      bit.recycle();*/
+                       image.close();
+                       if (bit == null) return;
+                       String url = ScanQRCode.scan(bit);
+                       bit.recycle();*/
                       String url = ScanQRCode.image(image, true);
                       logger.debug(url);
                       if (url.startsWith("https://user.mihoyo.com/qr_code_in_game.html")) {

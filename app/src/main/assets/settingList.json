@@ -8,4 +8,9 @@
 	"name": "autoConfirm",
 	"title": "抢码成功自动确认",
 	"normal": true
+}, {
+	"type": "switch",
+	"name": "debug",
+	"title": "Debug",
+	"normal": false
 }]
