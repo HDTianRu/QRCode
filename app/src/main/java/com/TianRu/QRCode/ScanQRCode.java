@@ -57,6 +57,6 @@ public class ScanQRCode {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return "扫描失败";
+    return "";
   }
 }

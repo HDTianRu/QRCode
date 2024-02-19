@@ -65,7 +65,7 @@ public class ScreenCaptureHelper {
     mImageReader.setOnImageAvailableListener(listener, handler);
   }
 
-  public static Bitmap imageToBitmap(Image image) {
+  public static Bitmap imageToBitmap(Image image, boolean autoClose) {
     Image.Plane[] planes = image.getPlanes();
     ByteBuffer buffer = planes[0].getBuffer();
     int pixelStride = planes[0].getPixelStride();
@@ -73,6 +73,7 @@ public class ScreenCaptureHelper {
     int rowPadding = rowStride - pixelStride * mScreenWidth;
     Bitmap bitmap = Bitmap.createBitmap(mScreenWidth + rowPadding / pixelStride, mScreenHeight, Bitmap.Config.ARGB_8888);
     bitmap.copyPixelsFromBuffer(buffer);
+    if (autoClose) image.close();
     planes = null;
     buffer = null;
     return Bitmap.createBitmap(bitmap, 0, 0, mScreenWidth, mScreenHeight);

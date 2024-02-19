@@ -185,14 +185,16 @@ public class MainActivity extends Activity {
                 helper.Capture(new ImageReader.OnImageAvailableListener(){
                     @Override
                     public void onImageAvailable(ImageReader reader) {
+                      if (!isRun) return;
                       Image image = reader.acquireLatestImage();
                       /*Bitmap bit = ScreenCaptureHelper.imageToBitmap(image);
                        image.close();
                        if (bit == null) return;
                        String url = ScanQRCode.scan(bit);
                        bit.recycle();*/
-                      String url = ScanQRCode.image(image, true);
-                      logger.debug(url);
+                      String url = ScanQRCode.bitmap(ScreenCaptureHelper.imageToBitmap(image, true), true);
+                      if (url.equals("")) logger.debug("扫描失败");
+                      else logger.info(url);
                       if (url.startsWith("https://user.mihoyo.com/qr_code_in_game.html")) {
                         logger.info("已扫描到二维码");
                         Map value=new HashMap<String,Object>();
@@ -208,12 +210,12 @@ public class MainActivity extends Activity {
                           logger.info("扫码成功");
                         }
                         if (autoClose) {
+                          isRun = false;
+                          helper.pause();
                           runOnUiThread(new Runnable(){
                               @Override
                               public void run() {
                                 floatingButton.setText("开始扫描");
-                                isRun = false;
-                                helper.pause();
                               }
                             });
                         }
