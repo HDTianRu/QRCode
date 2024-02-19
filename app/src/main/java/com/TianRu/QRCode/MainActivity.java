@@ -203,19 +203,19 @@ public class MainActivity extends Activity {
                         value.put("cookie", user.stoken);
                         value.put("raw", user.raw);
                         boolean succ=Request.login(value, autoConfirm);
+                        value = null;
+                        if (succ) {
+                          logger.info("扫码成功");
+                        }
                         if (autoClose) {
-                          isRun = false;
-                          helper.pause();
                           runOnUiThread(new Runnable(){
                               @Override
                               public void run() {
                                 floatingButton.setText("开始扫描");
+                                isRun = false;
+                                helper.pause();
                               }
                             });
-                        }
-                        value = null;
-                        if (succ) {
-                          logger.info("扫码成功");
                         }
                       }
                     }

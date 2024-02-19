@@ -91,10 +91,6 @@ public class ScreenCaptureHelper {
   }
 
   public void pause() {
-    if (handler != null && handler.getLooper() != null) {
-      handler.getLooper().quitSafely();
-      handler = null;
-    }
     if (mImageReader != null) {
       mImageReader.close();
       mImageReader = null;
@@ -102,6 +98,10 @@ public class ScreenCaptureHelper {
     if (mVirtualDisplay != null) {
       mVirtualDisplay.release();
       mVirtualDisplay = null;
+    }
+    if (handler != null && handler.getLooper() != null) {
+      handler.getLooper().quitSafely();
+      handler = null;
     }
   }
 
