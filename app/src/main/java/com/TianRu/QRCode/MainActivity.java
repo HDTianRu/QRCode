@@ -2,6 +2,7 @@ package com.TianRu.QRCode;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -204,10 +207,16 @@ public class MainActivity extends Activity {
                         }
                         value.put("cookie", user.stoken);
                         value.put("raw", user.raw);
-                        boolean succ=Request.login(value, autoConfirm);
+                        Bundle ret = Request.login(value, autoConfirm);
                         value = null;
-                        if (succ) {
+                        //sendConfirm(url);
+                        if (ret.getBoolean("success")) {
                           logger.info("扫码成功");
+                          if (!autoConfirm) {
+                            String ConfirmData = ret.getString("data");
+                            logger.info("Confirm Data:\n" + ConfirmData);
+                            sendConfirm(ConfirmData);
+                          }
                         }
                         if (autoClose) {
                           isRun = false;
@@ -226,7 +235,7 @@ public class MainActivity extends Activity {
             });
         }
       });
-    
+
     floatingView.setOnTouchListener(new View.OnTouchListener() {
         private int initialX;
         private int initialY;
@@ -284,6 +293,26 @@ public class MainActivity extends Activity {
             });
         }
       });
+  }
+
+  public void sendConfirm(String data) {
+    Intent confirmIntent = new Intent(this, ConfirmReceiver.class);
+    confirmIntent.setAction("confirm");
+    confirmIntent.putExtra("data", data);
+    PendingIntent confirm = PendingIntent.getBroadcast(this, 0, confirmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    Intent cancelIntent = new Intent(this, ConfirmReceiver.class);
+    cancelIntent.setAction("cancel");
+    cancelIntent.putExtra("data", data);
+    PendingIntent cancel = PendingIntent.getBroadcast(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "confirm")
+      .setSmallIcon(R.drawable.ic_launcher)
+      .setContentTitle("已抢码成功")
+      .setContentText("抢码成功，点击确认")
+      .setPriority(NotificationCompat.PRIORITY_HIGH)
+      .addAction(R.drawable.ic_launcher, "取消", cancel)
+      .addAction(R.drawable.ic_launcher, "确认", confirm);
+    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+    notificationManager.notify(114, builder.build());
   }
 
   @Override

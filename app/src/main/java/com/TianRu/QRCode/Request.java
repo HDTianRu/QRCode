@@ -20,14 +20,17 @@ import okhttp3.ResponseBody;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.os.Bundle;
 
 public class Request {
   public static String saltWeb = "jEpJb9rRARU2rXDA9qYbZ3selxkuct9a";//lk2
   public static String passSalt = "JwYDpKvLj6MrMqqYU6jTKF17KNO2PXoS";
 
-  public static boolean login(Map<String,Object> value, boolean confirm) {
+  public static Bundle login(Map<String,Object> value, boolean confirm) {
     String device = randomString(64);
     Map map = new HashMap();
+    Bundle bundle = new Bundle();
+    bundle.putBoolean("success", false);
     map.put("app_id", value.get("app_id"));
     map.put("ticket", value.get("ticket"));
     map.put("device", device);
@@ -36,32 +39,34 @@ public class Request {
       JSONObject res=new JSONObject(str);
       if (res.getInt("retcode") != 0) {
         MainActivity.logger.error(res.getString("message"));
-        return false;
+        return bundle;
       }
       Map payload = new HashMap();
       payload.put("proto", "Account");
       payload.put("raw", value.get("raw"));
       map.put("payload", payload);
       if (!confirm) {
-        MainActivity.logger.info(
-          "Confirm Data:\n" + 
+        String ConfirmData =
           "https://api-sdk.mihoyo.com/" + value.get("biz_key") + "/combo/panda/qrcode/confirm" + "#" + 
           value.get("cookie").toString() + "#" + 
-          new JSONObject(map).toString());
-        return true;
+          new JSONObject(map).toString();
+        bundle.putBoolean("success", true);
+        bundle.putString("data", ConfirmData);
+        return bundle;
       }
       String str2 = post("https://api-sdk.mihoyo.com/" + value.get("biz_key") + "/combo/panda/qrcode/confirm", value.get("cookie").toString(), new JSONObject(map).toString());
       res = new JSONObject(str2);
       if (res.getInt("retcode") != 0) {
         MainActivity.logger.error(res.getString("message"));
-        return false;
+        return bundle;
       }
       MainActivity.logger.info("确认成功");
-      return true;
+      bundle.putBoolean("success", true);
+      return bundle;
     } catch (JSONException e) {}
-    return false;
+    return bundle;
   }
-
+  
   public static boolean confirm(String data) {
     String[] datum = data.split("#");
     if (datum.length != 3) {
@@ -75,6 +80,7 @@ public class Request {
         MainActivity.logger.error(res.getString("message"));
         return false;
       }
+      MainActivity.logger.info("确认成功");
       return true;
     } catch (Exception e) {}
     return false;

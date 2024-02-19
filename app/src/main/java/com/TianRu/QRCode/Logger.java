@@ -16,6 +16,7 @@ public class Logger {
   public static final int LEVEL_INFO = 2;
   public static final int LEVEL_WARN = 3;
   public static final int LEVEL_ERROR = 4;
+  public static final int CHAR_LIMIT = 16;
 
   private final TextView mTextView;
   private final TextView mfloating_TextView;
@@ -61,6 +62,7 @@ public class Logger {
     SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
     String time = dateFormat.format(new Date());
     String logText = "[" + time + "][" + level + "]" + message + "\n";
+    message = message.length() <= CHAR_LIMIT ? message : message.substring(0, CHAR_LIMIT) + "...";
     final SpannableStringBuilder builder = new SpannableStringBuilder(logText);
     final SpannableStringBuilder builder2 = new SpannableStringBuilder(message+"\n");
     builder.setSpan(new ForegroundColorSpan(color), 0, logText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
