@@ -33,9 +33,10 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
+import androidx.appcompat.app.AppCompatActivity;
 
 
-public class Login extends Activity {
+public class Login extends AppCompatActivity {
   private Handler handler;
   //private Thread tloginByPass;
   private Thread tloginByQRCode;

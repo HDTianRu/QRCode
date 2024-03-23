@@ -21,8 +21,9 @@ import java.io.InputStreamReader;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class Setting extends Activity {
+public class Setting extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

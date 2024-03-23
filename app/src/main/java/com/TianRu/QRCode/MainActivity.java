@@ -1,6 +1,5 @@
 package com.TianRu.QRCode;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,12 +23,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
   private MediaProjectionManager mMediaProjectionManager;
 
@@ -61,7 +61,6 @@ public class MainActivity extends Activity {
     Button login = findViewById(R.id.login);
     Button wishlog = findViewById(R.id.wishlog);
     Button start = findViewById(R.id.start);
-    Button flv = findViewById(R.id.flv);
     Button confirm = findViewById(R.id.confirm);
     setting.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -73,12 +72,6 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View view) {
           startActivity(new Intent(MainActivity.this, Login.class));
-        }
-      });
-    flv.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          startActivity(new Intent(MainActivity.this, Flv.class));
         }
       });
     TextView tv=findViewById(R.id.log);

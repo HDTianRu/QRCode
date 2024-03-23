@@ -4,6 +4,7 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import com.google.android.material.color.DynamicColors;
 
 public class TianRu extends Application {
 
@@ -15,6 +16,7 @@ public class TianRu extends Application {
     ScreenCaptureHelper.setContext(base);
     xcrash.XCrash.init(this);
     createNotificationChannel();
+    DynamicColors.applyToActivitiesIfAvailable(this);
   }
   
   private void createNotificationChannel() {

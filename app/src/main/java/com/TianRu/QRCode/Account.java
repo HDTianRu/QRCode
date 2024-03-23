@@ -1,18 +1,18 @@
 package com.TianRu.QRCode;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
-public class Account extends Activity {
+public class Account extends AppCompatActivity {
 
   private UserHelper uh;
   private int current;
