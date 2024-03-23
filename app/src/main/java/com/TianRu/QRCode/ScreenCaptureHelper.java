@@ -34,8 +34,7 @@ public class ScreenCaptureHelper {
   private VirtualDisplay mVirtualDisplay;
   private Handler handler;
 
-  public ScreenCaptureHelper(MediaProjection media) {
-    this.mMediaProjection = media;
+  public ScreenCaptureHelper() {
     windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     metrics = new DisplayMetrics();
     display = windowManager.getDefaultDisplay();
@@ -48,8 +47,13 @@ public class ScreenCaptureHelper {
   public static void setContext(Context con) {
     context = con;
   }
+  
+  public static void setMediaProjection(MediaProjection media) {
+    mMediaProjection = media;
+  }
 
   public void Capture(ImageReader.OnImageAvailableListener listener) {
+    if (mMediaProjection == null) throw new RuntimeException("mMediaProjection未初始化");
     mImageReader = ImageReader.newInstance(mScreenWidth, mScreenHeight, 0x1, 3); // ImageFormat.RGB_565 = 0x1
     HandlerThread handlerThread = new HandlerThread("CaptureHandler");
     handlerThread.start();

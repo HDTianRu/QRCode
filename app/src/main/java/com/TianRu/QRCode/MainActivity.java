@@ -318,9 +318,14 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "未授予获取屏幕权限", Toast.LENGTH_SHORT).show();
         return;
       }
-      MediaProjection mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data);
+      Intent service = new Intent(this, RecordService.class);
+      service.putExtra("code", resultCode);
+      service.putExtra("data", data);
+      logger.warn("try to start service");
+      startForegroundService(service);
+      //MediaProjection mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data);
       // 使用 mediaProjection 进行屏幕截图操作
-      helper = new ScreenCaptureHelper(mediaProjection);
+      helper = new ScreenCaptureHelper();
       windowManager.addView(floatingView, params);
     }
     if (requestCode == REQUEST_CODE) {

@@ -24,8 +24,7 @@
   <!-- 拍摄照片和视频 -->
   <uses-permission android:name="android.permission.CAMERA"/>
 
-  <!-- 开机启动 -->
-  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
   <application
     android:name=".TianRu"
@@ -55,13 +54,13 @@
 
     <activity android:name=".Account"/>
 
-    <activity android:name=".Flv"/>
-
-    <meta-data
-      android:name="android.max_aspect"
-      android:value="4.0"/>
-
     <receiver android:name=".ConfirmReceiver"/>
+
+    <service
+      android:name=".RecordService"
+      android:enabled="true"
+      android:foregroundServiceType="mediaProjection"
+      android:exported="true"/>
 
   </application>
 
