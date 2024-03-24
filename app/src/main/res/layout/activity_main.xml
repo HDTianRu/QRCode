@@ -4,22 +4,58 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:background="?attr/colorPrimaryContainer">
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="10dp"
+		android:background="?attr/colorSecondaryContainer">
+
+		<ImageView
+			android:src="@drawable/ic_line_scan"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:maxHeight="30dp"
+			android:maxWidth="30dp"
+			android:id="@+id/icon"
+			android:layout_centerVertical="true"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="@string/app_name"
+			android:textSize="30sp"
+			android:layout_toRightOf="@id/icon"
+			android:textColor="?attr/colorSecondary"/>
+
+	</RelativeLayout>
+
+	<View
+		android:background="?attr/colorPrimary"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"/>
 
 	<Button
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="开启"
+		android:text="启动~"
 		android:id="@+id/start"
+		app:icon="@drawable/ic_play"
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
-		android:layout_marginTop="10dp"/>
+		android:layout_marginTop="10dp"
+		android:height="100dp"
+		android:textSize="50sp"/>
 
 	<Button
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:text="设置"
 		android:id="@+id/setting"
+		style="@style/Widget.Material3.Button.ElevatedButton"
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
 		android:layout_marginTop="10dp"/>
@@ -29,6 +65,7 @@
 		android:layout_height="wrap_content"
 		android:text="授予必要权限"
 		android:id="@+id/request"
+		style="@style/Widget.Material3.Button.ElevatedButton"
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
 		android:layout_marginTop="10dp"/>
@@ -38,6 +75,7 @@
 		android:layout_height="wrap_content"
 		android:text="登录"
 		android:id="@+id/login"
+		style="@style/Widget.Material3.Button.ElevatedButton"
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
 		android:layout_marginTop="10dp"/>
@@ -47,6 +85,7 @@
 		android:layout_height="wrap_content"
 		android:text="获取抽卡记录"
 		android:id="@+id/wishlog"
+		style="@style/Widget.Material3.Button.ElevatedButton"
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
 		android:layout_marginTop="10dp"/>
@@ -56,6 +95,7 @@
 		android:layout_height="wrap_content"
 		android:text="确认"
 		android:id="@+id/confirm"
+		style="@style/Widget.Material3.Button.ElevatedButton"
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
 		android:layout_marginTop="10dp"/>

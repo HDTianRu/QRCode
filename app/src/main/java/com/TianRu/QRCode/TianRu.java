@@ -5,6 +5,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import com.google.android.material.color.DynamicColors;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TianRu extends Application {
 
@@ -20,12 +22,16 @@ public class TianRu extends Application {
   }
   
   private void createNotificationChannel() {
-      CharSequence name = "确认登录";
-      String description = "关闭自动确认时，发送确认通知";
-      int importance = NotificationManager.IMPORTANCE_HIGH;
-      NotificationChannel channel = new NotificationChannel("confirm", name, importance);
-      channel.setDescription(description);
+      List<NotificationChannel> channels = new ArrayList<NotificationChannel>(2);
+      channels.add(generateChannel("confirm", "确认登录", "关闭自动确认时，发送确认通知", NotificationManager.IMPORTANCE_HIGH));
+      channels.add(generateChannel("fore", "前台服务", "运行前台服务所需通知", NotificationManager.IMPORTANCE_MIN));
       NotificationManager notificationManager = getSystemService(NotificationManager.class);
-      notificationManager.createNotificationChannel(channel);
+      notificationManager.createNotificationChannels(channels);
     }
+    
+  private NotificationChannel generateChannel(String flag, String name, String description, int importance){
+    NotificationChannel channel = new NotificationChannel(flag, name, importance);
+    channel.setDescription(description);
+    return channel;
+  }
 }

@@ -24,22 +24,19 @@ public class RecordService extends Service {
   public int onStartCommand(final Intent intent, int flags, int startId) {
     int mResultCode = intent.getIntExtra("code", -1);
     Intent mResultData = intent.getParcelableExtra("data");
-    MainActivity.logger.warn("try to media");
     MediaProjection mMediaProjection = ((MediaProjectionManager) this.getSystemService(Context.MEDIA_PROJECTION_SERVICE)).getMediaProjection(mResultCode, mResultData);
-    MainActivity.logger.warn("try to set");
     ScreenCaptureHelper.setMediaProjection(mMediaProjection);
     return super.onStartCommand(intent, flags, startId);
   }
 
   public void startNotification() {
-    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "confirm")
+    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "fore")
       .setSmallIcon(R.drawable.ic_launcher)
       .setPriority(NotificationCompat.PRIORITY_MIN)
       .setContentTitle("抢码器运行中~~~")
       .setContentText("旅行总有一天会到达终点，不必匆忙");
     Notification notification = notificationBuilder.build();
     notification.defaults = Notification.DEFAULT_SOUND;
-    MainActivity.logger.warn("try to startForeground");
     startForeground(233, notification);
   }
 

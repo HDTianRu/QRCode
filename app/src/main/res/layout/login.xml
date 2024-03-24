@@ -3,13 +3,14 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:orientation="vertical">
+  android:orientation="vertical"
+  android:background="?attr/colorPrimaryContainer">
 
   <Button
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="扫码登录"
-    android:background="@drawable/button_background"
+    style="@style/Widget.Material3.Button.ElevatedButton"
     android:id="@+id/loginByQRCode"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
@@ -19,7 +20,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="读取YAML内Stoken"
-    android:background="@drawable/button_background"
+    style="@style/Widget.Material3.Button.ElevatedButton"
     android:id="@+id/loginByYAML"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
@@ -29,7 +30,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="通过扫码登录的stuid与token"
-    android:background="@drawable/button_background"
+    style="@style/Widget.Material3.Button.ElevatedButton"
     android:id="@+id/loginByToken"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
@@ -39,7 +40,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="账号管理"
-    android:background="@drawable/button_background"
+    style="@style/Widget.Material3.Button.ElevatedButton"
     android:id="@+id/manageUser"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"

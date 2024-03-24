@@ -28,6 +28,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import java.util.HashMap;
 import java.util.Map;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
           final View layout = LayoutInflater.from(MainActivity.this).inflate(R.layout.simple_input, null);
-          AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+          MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this);
           builder.setView(layout);
           builder.setTitle("Input Confirm Data");
           builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
@@ -321,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
       Intent service = new Intent(this, RecordService.class);
       service.putExtra("code", resultCode);
       service.putExtra("data", data);
-      logger.warn("try to start service");
+      logger.info("Starting...");
       startForegroundService(service);
       //MediaProjection mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data);
       // 使用 mediaProjection 进行屏幕截图操作
