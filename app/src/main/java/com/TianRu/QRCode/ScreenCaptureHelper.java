@@ -58,10 +58,6 @@ public class ScreenCaptureHelper {
     HandlerThread handlerThread = new HandlerThread("CaptureHandler");
     handlerThread.start();
     handler = new Handler(handlerThread.getLooper());
-    if (mMediaProjection == null) {
-      Toast.makeText(this.context, "未授予录屏权限", Toast.LENGTH_SHORT).show();
-      return;
-    }
     mVirtualDisplay = mMediaProjection.createVirtualDisplay(
       "ScreenCapture",
       mScreenWidth, mScreenHeight, mScreenDensity, VIRTUAL_DISPLAY_FLAGS,
@@ -70,6 +66,7 @@ public class ScreenCaptureHelper {
   }
 
   public static Bitmap imageToBitmap(Image image, boolean autoClose) {
+    if (image == null) return null;
     Image.Plane[] planes = image.getPlanes();
     ByteBuffer buffer = planes[0].getBuffer();
     int pixelStride = planes[0].getPixelStride();

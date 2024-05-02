@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 public class ScanQRCode {
   public static String bitmap(Bitmap bitmap, boolean autoRecycle) {
+    if (bitmap == null) return "";
     int[] pixels = new int[bitmap.getWidth() * bitmap.getHeight()];
     int width = bitmap.getWidth();
     int height = bitmap.getHeight();
@@ -25,6 +26,7 @@ public class ScanQRCode {
   }
 
   public static String image(Image image, boolean autoClose) {
+    if (image == null) return "";
     ByteBuffer buffer = image.getPlanes()[0].getBuffer();
     int[] pixels = new int[buffer.remaining() / 4];
     buffer.asIntBuffer().get(pixels);

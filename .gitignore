@@ -1,4 +1,2 @@
 /build
 /.gradle
-/keystore.properties
-/*.jks

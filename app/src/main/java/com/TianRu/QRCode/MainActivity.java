@@ -293,11 +293,11 @@ public class MainActivity extends AppCompatActivity {
     Intent confirmIntent = new Intent(this, ConfirmReceiver.class);
     confirmIntent.setAction("confirm");
     confirmIntent.putExtra("data", data);
-    PendingIntent confirm = PendingIntent.getBroadcast(this, 0, confirmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    PendingIntent confirm = PendingIntent.getBroadcast(this, 0, confirmIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
     Intent cancelIntent = new Intent(this, ConfirmReceiver.class);
     cancelIntent.setAction("cancel");
     cancelIntent.putExtra("data", data);
-    PendingIntent cancel = PendingIntent.getBroadcast(this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    PendingIntent cancel = PendingIntent.getBroadcast(this, 0, cancelIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
     NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "confirm")
       .setSmallIcon(R.drawable.ic_launcher)
       .setContentTitle("已抢码成功")
