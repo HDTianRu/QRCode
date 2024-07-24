@@ -109,7 +109,7 @@ public class Login extends AppCompatActivity {
               public void run() {
                 try {
                   Map map=new HashMap();
-                  map.put("app_id", 4);
+                  map.put("app_id", 8);
                   map.put("device", device);
                   JSONObject res = new JSONObject(Request.post("https://hk4e-sdk.mihoyo.com/hk4e_cn/combo/panda/qrcode/fetch", "", new JSONObject(map).toString()));
                   String url =res.getJSONObject("data").getString("url");
