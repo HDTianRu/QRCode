@@ -1,6 +1,5 @@
 package com.TianRu.QRCode;
 
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,7 +7,6 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.Image;
 import android.media.ImageReader;
-import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,9 +24,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.HashMap;
 import java.util.Map;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
   private boolean isRun = false;
   private UserHelper uh;
   private User user;
+  private String temp = "";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -193,6 +192,11 @@ public class MainActivity extends AppCompatActivity {
                       if (url.equals("")) logger.debug("扫描失败");
                       else logger.info(url);
                       if (url.startsWith("https://user.mihoyo.com/qr_code_in_game.html")) {
+                        if (url == temp) {
+                          logger.info("Same URL. Ignored");
+                          return;
+                        }
+                        temp = url;
                         logger.info("已扫描到二维码");
                         Map value=new HashMap<String,Object>();
                         for (String e:url.substring(45).split("&")) {
